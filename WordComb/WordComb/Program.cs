@@ -35,9 +35,20 @@ namespace WordComb
             var expLenFour = new string[] { "2134", "2314", "2341", "3241", "3421", "3412", "4312", "4132", "4123", "1423", "1243", "1234" };
             var expLenFive = new string[] { "21345", "23145", "23415", "23451", "32451", "34251", "34521", "34512", "43512", "45312", "45132", "45123", "54123", "51423", "51243", "51234", "15234", "12534", "12354", "12345" };
             var actualRes = permutOfSymbolInString(str);
-            if (expLenTree.SequenceEqual(actualRes) || expLenFour.SequenceEqual(actualRes) || expLenFive.SequenceEqual(actualRes))
+
+            if (expLenTree.SequenceEqual(actualRes))
             {
-                Console.WriteLine("True. Prmutations are correct.");
+                Console.WriteLine("True. Prmutations are correct for string 123 wich length is 3.");
+            }
+            else if (expLenFour.SequenceEqual(actualRes))
+            {
+                Console.WriteLine("True. Prmutations are correct for string 1234 wich length is 4.");
+
+            }
+            else if (expLenFive.SequenceEqual(actualRes))
+            {
+                Console.WriteLine("True. Prmutations are correct for string 12345 wich length is 5.");
+
             }
             else
             {
