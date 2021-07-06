@@ -5,6 +5,9 @@ namespace WordComb
 {
     class Program
     {
+        private const string _123 = "213,231,321,312,132,123";
+        private const string _1234 = "2134,2314,2341,3241,3421,3412,4312,4132,4123,1423,1243,1234";
+        private const string _012345 = "102345,120345,123045,123405,123450,213450,231450,234150,234510,234501,324501,342501,345201,345021,345012,435012,453012,450312,450132,450123,540123,504123,501423,501243,501234,051234,015234,012534,012354,012345";
         public static string[] permutOfSymbolInString(string str)
         {
             var len = str.Length;
@@ -29,31 +32,20 @@ namespace WordComb
             a = b;
             b = temp;
         }
-        public static void wordPermutTest(string str)
+        public static void wordPermutTest(string str, string[] actualRes)
         {
-            var expLenTree = new string[] { "213", "231", "321", "312", "132", "123" };
-            var expLenFour = new string[] { "2134", "2314", "2341", "3241", "3421", "3412", "4312", "4132", "4123", "1423", "1243", "1234" };
-            var expLenFive = new string[] { "21345", "23145", "23415", "23451", "32451", "34251", "34521", "34512", "43512", "45312", "45132", "45123", "54123", "51423", "51243", "51234", "15234", "12534", "12354", "12345" };
-            var actualRes = permutOfSymbolInString(str);
+            var actualStr = string.Join(",", actualRes);
 
-            if (expLenTree.SequenceEqual(actualRes))
+            if (str.SequenceEqual(actualStr))
             {
-                Console.WriteLine("True. Prmutations are correct for string 123 wich length is 3.");
-            }
-            else if (expLenFour.SequenceEqual(actualRes))
-            {
-                Console.WriteLine("True. Prmutations are correct for string 1234 wich length is 4.");
-
-            }
-            else if (expLenFive.SequenceEqual(actualRes))
-            {
-                Console.WriteLine("True. Prmutations are correct for string 12345 wich length is 5.");
-
+                Console.WriteLine("True. Prmutations are correct." + actualStr);
             }
             else
             {
                 Console.WriteLine("False: Prmutations are not correct.");
             }
+
+
         }
         public static void showPermutations(string str)
         {
@@ -67,9 +59,9 @@ namespace WordComb
         }
         static void Main(string[] args)
         {
-            wordPermutTest("123");
-            wordPermutTest("1234");
-            wordPermutTest("12345");
+            wordPermutTest(_123, permutOfSymbolInString("123"));
+            wordPermutTest(_1234, permutOfSymbolInString("1234"));
+            wordPermutTest(_012345, permutOfSymbolInString("012345"));
         }
     }
 }
