@@ -35,31 +35,21 @@ namespace WordComb
             var expectLen = str.Length * (str.Length - 1);
             if (expectLen == actualRes.Length)
             {
-                for (int i = 0; i < actualRes.Length; i++)
+                foreach (string el in actualRes)
                 {
-                    for (int j = 0; j < actualRes.Length; j++)
+                    if (el.Length != str.Length) return "Execption: the length of the element does not correct.";
+                    for (int i = 0; i < str.Length; i++)
                     {
-                        if (i == j) continue;
-                        if (actualRes[i] == actualRes[j])
-                        {
-                            return "False: Repeating element in array.";
-                        }
-                        else if (actualRes[i].Length != str.Length)
-                        {
-                            var el = actualRes[i].Length;
-                            return "False: The length of the element does not match the  length of the input string.";
-
-                        }
-
+                        if (el.Contains(str[i]) == false) return "Execption: does not contains element of string.";
                     }
                 }
             }
             else
             {
-                return "False:" + str + " expected length " + expectLen + ", actual length " + actualRes.Length; ;
+                return "Execption: wrong number of elements after permutation.";
             }
-            return "Pass. For " + str + ": expected length " + expectLen + ", actual length " + actualRes.Length;
-            
+            return null;
+
         }
         public static void showPermutArr(string str)
         {
@@ -74,6 +64,7 @@ namespace WordComb
         static void Main(string[] args)
         {
             Console.WriteLine(permutTest("123"));
+            Console.WriteLine(permutTest("1233"));
             Console.WriteLine(permutTest("1234"));
             Console.WriteLine(permutTest("012349"));
             Console.WriteLine(permutTest("0123456789"));
