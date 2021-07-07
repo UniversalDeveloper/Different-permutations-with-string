@@ -23,34 +23,36 @@ namespace WordComb
             }
             return resaltArr;
         }
+
         public static void swap(ref char a, ref char b)
         {
             var temp = a;
             a = b;
             b = temp;
         }
+
         public static string permutTest(string str)
         {
             var actualRes = permutStr(str);
             var expectLen = str.Length * (str.Length - 1);
-            if (expectLen == actualRes.Length)
+            if (expectLen != actualRes.Length)
+                return "Wrong number of elements after permutation.";
+
+            foreach (string el in actualRes)
             {
-                foreach (string el in actualRes)
+                if (el.Length != str.Length)
+                    return "The length of the element does not correct.";
+
+                for (int i = 0; i < str.Length; i++)
                 {
-                    if (el.Length != str.Length) return "Execption: the length of the element does not correct.";
-                    for (int i = 0; i < str.Length; i++)
-                    {
-                        if (el.Contains(str[i]) == false) return "Execption: does not contains element of string.";
-                    }
+                    if (!el.Contains(str[i]))
+                        return "Does not contains element of string.";
                 }
             }
-            else
-            {
-                return "Execption: wrong number of elements after permutation.";
-            }
-            return null;
 
+            return null;
         }
+
         public static void showPermutArr(string str)
         {
             var resArr = permutStr(str);
@@ -63,11 +65,11 @@ namespace WordComb
         }
         static void Main(string[] args)
         {
-            Console.WriteLine(permutTest("123"));
-            Console.WriteLine(permutTest("1233"));
-            Console.WriteLine(permutTest("1234"));
-            Console.WriteLine(permutTest("012349"));
-            Console.WriteLine(permutTest("0123456789"));
+            Console.WriteLine(permutTest("123") ?? "Passed");
+            Console.WriteLine(permutTest("1233") ?? "Passed");
+            Console.WriteLine(permutTest("1234") ?? "Passed");
+            Console.WriteLine(permutTest("012349") ?? "Passed");
+            Console.WriteLine(permutTest("0123456789") ?? "Passed");
 
         }
     }
