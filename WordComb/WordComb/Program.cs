@@ -5,10 +5,7 @@ namespace WordComb
 {
     class Program
     {
-        private const string _123 = "213,231,321,312,132,123";
-        private const string _1234 = "2134,2314,2341,3241,3421,3412,4312,4132,4123,1423,1243,1234";
-        private const string _012345 = "102345,120345,123045,123405,123450,213450,231450,234150,234510,234501,324501,342501,345201,345021,345012,435012,453012,450312,450132,450123,540123,504123,501423,501243,501234,051234,015234,012534,012354,012345";
-        public static string[] permutOfSymbolInString(string str)
+        public static string[] permutStr(string str)
         {
             var len = str.Length;
             int counter = 0;
@@ -32,26 +29,43 @@ namespace WordComb
             a = b;
             b = temp;
         }
-        public static void wordPermutTest(string str, string[] actualRes)
+        public static string permutTest(string str)
         {
-            var actualStr = string.Join(",", actualRes);
-
-            if (str.SequenceEqual(actualStr))
+            var actualRes = permutStr(str);
+            var expectLen = str.Length * (str.Length - 1);
+            if (expectLen == actualRes.Length)
             {
-                Console.WriteLine("True. Prmutations are correct." + actualStr);
+                for (int i = 0; i < actualRes.Length; i++)
+                {
+                    for (int j = 0; j < actualRes.Length; j++)
+                    {
+                        if (i == j) continue;
+                        if (actualRes[i] == actualRes[j])
+                        {
+                            return "False: Repeating element in array.";
+                        }
+                        else if (actualRes[i].Length != str.Length)
+                        {
+                            var el = actualRes[i].Length;
+                            return "False: The length of the element does not match the  length of the input string.";
+
+                        }
+
+                    }
+                }
             }
             else
             {
-                Console.WriteLine("False: Prmutations are not correct.");
+                return "False:" + str + " expected length " + expectLen + ", actual length " + actualRes.Length; ;
             }
-
-
+            return "Pass. For " + str + ": expected length " + expectLen + ", actual length " + actualRes.Length;
+            
         }
-        public static void showPermutations(string str)
+        public static void showPermutArr(string str)
         {
-            var resaltArr = permutOfSymbolInString(str);
+            var resArr = permutStr(str);
 
-            foreach (string s in resaltArr)
+            foreach (string s in resArr)
             {
                 Console.WriteLine(s);
             }
@@ -59,9 +73,11 @@ namespace WordComb
         }
         static void Main(string[] args)
         {
-            wordPermutTest(_123, permutOfSymbolInString("123"));
-            wordPermutTest(_1234, permutOfSymbolInString("1234"));
-            wordPermutTest(_012345, permutOfSymbolInString("012345"));
+            Console.WriteLine(permutTest("123"));
+            Console.WriteLine(permutTest("1234"));
+            Console.WriteLine(permutTest("012349"));
+            Console.WriteLine(permutTest("0123456789"));
+
         }
     }
 }
